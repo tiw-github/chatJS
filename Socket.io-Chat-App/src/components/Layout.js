@@ -27,12 +27,25 @@ export default class Layout extends Component {
 		const socket = io(socketUrl)
 
 		socket.on('connect', ()=>{
-			console.log("Connected");
+		if(this.state.user){
+this.reconnect(socket)
+		}else{
+		console.log("Connected");
+		}
 		})
 		
 		this.setState({socket})
 	}
 
+    reconnect = (socket) => {
+    socket.emit(VERIFY_USER,this.state.user.name, ({isUser,user}) => {
+    if(isUser){
+    this.setState({user:null})
+    }else{
+    this.setUser(user)
+    }
+    })
+    }
 	/*
 	* 	Sets the user property in state 
 	*	@param user {id:number, name:string}
