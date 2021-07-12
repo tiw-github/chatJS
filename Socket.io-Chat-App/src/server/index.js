@@ -1,3 +1,4 @@
+
 const express = require('express')
 const app = express()
 const server = require('http').Server(app)
@@ -7,7 +8,7 @@ const PORT = process.env.PORT || 3231
 
 const SocketManager = require('./SocketManager')
 app.user( express.static(__dirname + '/../../build'))
-io.on('connection', SocketManager)
+server.on('connection', SocketManager)
 
 app.listen(PORT, ()=>{
 	console.log("Connected to port:" + PORT);
