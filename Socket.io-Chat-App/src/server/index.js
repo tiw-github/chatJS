@@ -10,6 +10,6 @@ const SocketManager = require('./SocketManager')
 app.use( express.static(__dirname + '/../../build'))
 server.on('connection', SocketManager)
 
-app.listen(PORT, ()=>{
+server.listen(PORT, ()=>{
 	console.log("Connected to port:" + PORT);
 })
